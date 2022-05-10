@@ -1,38 +1,30 @@
 #include "main.h"
-#include <stdlib.h>
-
+#include <stdio.h>
 /**
- * print_R - prints a string in rot13
- * @R: string to print
- *
- * Return: number of chars printed
- */
-int print_R(va_list R)
+  * print_rot13 - encodes a string into rot13.
+  * @R: string to convert
+  * Return: size the output text
+  */
+int print_rot13(va_list R)
 {
-	char *str;
-	unsigned int i, j;
-	int count = 0;
-	char in[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-	char out[] = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
+	int j, i, count = 0;
+	char *r;
+	char input[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz";
+	char output[] = "NOPQRSTUVWXYZABCDEFGHIJKLM nopqrstuvwxyzabcdefghijklm";
 
-	str = va_arg(R, char *);
-	if (str == NULL)
-		str = "(ahyy)";
-	for (i = 0; str[i]; i++)
+	r = va_arg(R, char *);
+	if (r == NULL)
+		r = "(null)";
+	for (j = 0; r[j] != '\0'; j++)
 	{
-		for (j = 0; in[j]; j++)
+		for (i = 0; input[i] != '\0'; i++)
 		{
-			if (in[j] == str[i])
+			if (r[j] == input[i])
 			{
-				_putchar(out[j]);
+				_putchar(output[i]);
 				count++;
 				break;
 			}
-		}
-		if (!in[j])
-		{
-			_putchar(str[i]);
-			count++;
 		}
 	}
 	return (count);
